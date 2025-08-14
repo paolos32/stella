@@ -1,0 +1,252 @@
+:root{
+  /* Cambia qui il nome del tuo file di sfondo */
+  --bg-image: url('assets/sfondo.png');
+  --bg-size: 300px;            /* 160 → pattern fitto; prova 120/100 per ancora più ripetizioni */
+  --scrim: rgba(0,0,0,.55);    /* quanto scurire lo sfondo dietro */
+  --ink: #0b0b0b;              /* testo scuro nei pannelli */
+  --accent: #ffcc00;           /* giallo naruto */
+  --accent-dark: #ffb300;
+  --panel: #ffffff;
+  --panel-border: #111;
+  --btn-bg: #ffeb3b;
+  --btn-ink: #111;
+  --link: #1976d2;
+}
+
+*{ box-sizing:border-box }
+
+html,body{
+  height:100%;
+  margin:0;
+}
+
+body{
+  font-family: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:#fff;
+  background: var(--bg-image) repeat center center fixed #000;
+  background-size: var(--bg-size);
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Scrim che attenua lo sfondo per massimizzare leggibilità */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 25%, var(--scrim) 65%, var(--scrim) 100%);
+  pointer-events:none;
+}
+
+/* Contenitore pagina */
+.page{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  padding: clamp(16px, 3vw, 28px);
+}
+
+/* Header */
+.site-header{
+  text-align:center;
+  margin-bottom: clamp(12px, 2.2vw, 18px);
+}
+
+.title {
+  font-family:'Bangers', cursive;
+  font-size: clamp(38px, 6vw, 64px);
+  margin:0 0 6px;
+  letter-spacing:1px;
+  color:#fff;
+  text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0,0,0,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* spazio tra testo e occhi */
+}
+
+.title .eyes {
+  height: 200px; /* regola la dimensione */
+  vertical-align: middle;
+}
+.title span{
+  color: var(--accent);
+  -webkit-text-stroke: 2px #000;
+  text-shadow: 2px 2px 0 #000;
+}
+.subtitle {
+  font-family: 'Bangers', cursive; /* stesso font del titolo */
+  margin: 0;
+  color: #ffcc00;                  /* giallo acceso in stile Naruto */
+  opacity: 1;
+  font-weight: 400;
+  font-size: clamp(24px, 3.2vw, 32px); /* più grande */
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 rgba(0,0,0,0.3);
+}
+/* Pannello principale (vignetta fumetto) */
+.panel{
+  width:min(900px, 100%);
+  margin: 0 auto;
+  background: var(--panel);
+  color: var(--ink);
+  border: 4px solid var(--panel-border);
+  border-radius: 22px;
+  box-shadow: 14px 14px 0 #000;
+  padding: clamp(14px, 2.2vw, 28px);
+  position:relative;
+}
+.title-box {
+  background: rgba(0, 0, 0, 0.65); /* nero semi-trasparente */
+  padding: 16px 20px;
+  border-radius: 14px;
+  display: inline-block; /* così non occupa tutta la larghezza */
+  text-align: center;
+}
+
+.site-header {
+  text-align: center;
+}
+
+.title .eyes {
+  height: 120px;
+  vertical-align: middle;
+}
+
+/* Cornice “balloon” */
+.speech-bubble::before{
+  content:"";
+  position:absolute;
+  left: clamp(22px, 6vw, 80px);
+  bottom:-28px;
+  width:0;height:0;
+  border: 20px solid transparent;
+  border-top-color: var(--panel-border);
+}
+.speech-bubble::after{
+  content:"";
+  position:absolute;
+  left: clamp(22px, 6vw, 80px);
+  bottom:-24px;
+  width:0;height:0;
+  border: 20px solid transparent;
+  border-top-color: var(--panel);
+}
+
+.lead{
+  font-size: clamp(18px, 2.4vw, 22px);
+  line-height:1.45;
+  margin:0 0 12px;
+}
+
+.quiz h2{
+  font-family:'Bangers', cursive;
+  font-size: clamp(26px, 3.8vw, 36px);
+  margin: 10px 0 12px;
+}
+
+.actions{ margin-top: 14px }
+
+/* Bottoni grandi e leggibili */
+.btn{
+  display:inline-block;
+  border: 4px solid #000;
+  border-radius:16px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  padding: 14px 20px;
+  cursor:pointer;
+  box-shadow: 6px 6px 0 #000;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  user-select:none;
+}
+.btn:active{ transform: translate(2px,2px); box-shadow: 3px 3px 0 #000; }
+
+.btn-primary{
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+}
+
+/* Pulsanti risposta */
+.answer-btn{
+  width:100%;
+  text-align:center;
+  margin: 10px 0;
+  background:#4fc3f7;
+  color:#06202a;
+  border: 4px solid #000;
+  border-radius:14px;
+  font-weight:900;
+  padding: 14px 16px;
+  box-shadow: 5px 5px 0 #0003;
+}
+.answer-btn:hover{ filter: brightness(1.05) }
+
+/* Sezione risultato */
+.result{
+  margin-top: 10px;
+}
+
+.result .win{
+  font-family:'Bangers', cursive;
+  font-size: clamp(28px, 4vw, 40px);
+  color:#0b0b0b;
+}
+
+.codice-buono{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:#fff6cc;
+  border: 3px dashed #000;
+  padding: 10px 14px;
+  border-radius:12px;
+  margin-top:10px;
+  font-weight:900;
+  color:#1a1100;
+}
+.code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background:#000;
+  color: var(--accent);
+  padding: 6px 10px;
+  border-radius:8px;
+  border:2px solid var(--accent-dark);
+}
+
+.copy{
+  border:3px solid #000;
+  background:#fff;
+  padding: 8px 10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.copy:active{ transform: translateY(1px) }
+
+.gift{
+  margin-top:16px;
+  display:block;
+  max-width: 280px;
+  border: 4px solid #000;
+  border-radius: 18px;
+  box-shadow: 8px 8px 0 #0002;
+}
+
+/* Footer */
+.site-footer{
+  text-align:center;
+  color:#eaeaea;
+  margin-top: 20px;
+  text-shadow:1px 1px 0 #000;
+}
+
+/* Accessibilità focus */
+button:focus-visible{
+  outline: 3px solid var(--accent-dark);
+  outline-offset: 2px;
+}
+
+/* Responsivo */
+@media (max-width: 520px){
+  .panel{ box-shadow: 10px 10px 0 #000; }
+}
